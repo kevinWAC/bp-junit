@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xsi:noNamespaceSchemaLocation="logback.xsd">
+<configuration>
 	<!-- redirection des logs vers la sortir Console Standard -->
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>
@@ -8,6 +7,26 @@
 			%msg%n</pattern>
 		</encoder>
 	</appender>
+	<!-- Creation fichier pour retour des logs-->
+	<appender name="FILE" class="ch.qos.logback.core.FileAppender">
+		<file>app.log</file>
+		<append>true</append>
+		<immediateFlush>true</immediateFlush>
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<!-- INFO --> 
+	<logger name="dev" level="INFO">
+			<appender-ref ref="FILE" />
+		</logger>
+
+	<!-- DEBUG --> 
+	<logger name="dev" level="DEBUG">
+			<appender-ref ref="FILE" />
+		</logger>
+
 	<!-- regle de logs par defaut. Ici : niveau INFO vers la sortie standard -->
 	<root level="INFO">
 		<appender-ref ref="STDOUT" />
